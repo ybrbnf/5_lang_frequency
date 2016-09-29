@@ -3,12 +3,13 @@ import re
 
 def load_data(filepath):
     lst = []
-    file_ = open(filepath, 'r').read().lower()
-    text = re.sub(u'[^а-яА-Яa-zA-Z\s\w]', '', file_)
-    text = re.sub(r'[\n*]', ' ', text)
-    text = re.split(' ', text)
-    for item in text:
-        lst.append(item)
+    with open(filepath, 'r') as file_:
+        txt = file_.read()
+        txt = re.sub(u'[^а-яА-Яa-zA-Z\s\w]', '', txt)
+        txt = re.sub(r'[\n*]', ' ', txt)
+        txt = re.split(' ', txt)
+        for item in txt:
+            lst.append(item)
     return lst
 
 
