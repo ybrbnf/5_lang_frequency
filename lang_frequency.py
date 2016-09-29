@@ -3,14 +3,19 @@ import re
 
 def load_data(filepath):
     lst = []
-    with open(filepath, 'r') as file_:
-        txt = file_.read()
-        txt = re.sub(u'[^а-яА-Яa-zA-Z\s\w]', '', txt)
-        txt = re.sub(r'[\n*]', ' ', txt)
-        txt = re.split(' ', txt)
-        for item in txt:
-            lst.append(item)
-    return lst
+    try:
+        with open(filepath, 'r') as file_:
+            txt = file_.read()
+            txt = re.sub(u'[^а-яА-Яa-zA-Z\s\w]', '', txt)
+            txt = re.sub(r'[\n*]', ' ', txt)
+            txt = re.split(' ', txt)
+            for item in txt:
+                lst.append(item)
+        return lst
+    except FileNotFoundError:
+        print ('Нет такого файла или папки. Программа будет закрыта.')
+        exit()
+    
 
 
 def get_most_frequent_words(text):
