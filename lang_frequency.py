@@ -1,36 +1,27 @@
 import re
+from collections import Counter
 
 
 def load_data(filepath):
-    lst = []
-    try:
-        with open(filepath, 'r') as file_:
-            txt = file_.read()
-            txt = re.sub(u'[^а-яА-Яa-zA-Z\s\w]', '', txt)
-            txt = re.sub(r'[\n*]', ' ', txt)
-            txt = re.split(' ', txt)
-            for item in txt:
-                lst.append(item)
-        return lst
-    except FileNotFoundError:
-        print ('Нет такого файла или папки. Программа будет закрыта.')
-        exit()
-    
+    txt = file_.read().lower()
+    return txt
 
 
 def get_most_frequent_words(text):
-    dct = {}
-    for item in text:
-        if item in dct:
-            dct[item] += 1
-        else:
-            dct[item] = 1
-    dct = sorted(dct.items(), key=lambda x: x[1], reverse=True)
-    return dct
+    txt = re.findall(r'\w+', text)
+    counter = Counter(txt)
+    txt = counter.most_common(10)
+    return txt
+
 
 if __name__ == '__main__':
-    filepath = input('Вседите путь и имя файла: ')
-    text = load_data(filepath)
-    d = get_most_frequent_words(text)
-    for item in d[0:9]:
+    try:
+        filepath = input('Вседите путь и имя файла: ')
+        with open(filepath, 'r') as file_:
+            text = load_data(filepath)
+    except FileNotFoundError:
+        print ('Нет такого файла или папки. Программа будет закрыта.')
+        exit()
+    top_ten_words = get_most_frequent_words(text)
+    for item in top_ten_words:
         print (item[0], item[1])
