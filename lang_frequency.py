@@ -10,7 +10,8 @@ def load_data(filepath):
 def get_most_frequent_words(text):
     txt = re.findall(r'\w+', text)
     counter = Counter(txt)
-    txt = counter.most_common(10)
+    top = 10
+    txt = counter.most_common(top)
     return txt
 
 
