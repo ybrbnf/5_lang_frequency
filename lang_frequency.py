@@ -3,17 +3,14 @@ from collections import Counter
 
 
 def load_data(filepath):
-    txt = file_.read().lower()
-    return txt
+    return file_.read().lower()
 
 
 def get_most_frequent_words(text):
-    txt = re.findall(r'\w+', text)
-    counter = Counter(txt)
-    top = 10
-    txt = counter.most_common(top)
-    return txt
-
+    prepared_text = re.findall(r'\w+', text)
+    counter = Counter(prepared_text)
+    top_ten = 10
+    return counter.most_common(top_ten)
 
 if __name__ == '__main__':
     try:
